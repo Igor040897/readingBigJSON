@@ -35,7 +35,6 @@ public class JSONReader {
 
     private void readJSONCountries(final JsonReader reader) throws IOException {
 
-        String text = null;
         ArrayList<Country> countries = new ArrayList<>();
 
         reader.beginObject();

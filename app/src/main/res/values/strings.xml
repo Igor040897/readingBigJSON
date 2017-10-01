@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Test</string>
+    <string name="app_name">Test in company "Faifly"</string>
+    <string name="info_city">Information about the city"</string>
+
+    <string name="city">City: </string>
+    <string name="latitude">Latitude: </string>
+    <string name="longitude">Longitude: </string>
 </resources>

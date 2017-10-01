@@ -1,7 +1,7 @@
 package com.igor040897.test;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,6 @@ import io.realm.RealmList;
  */
 public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ItemViewHolder> {
     private final RealmList<RealmString> items = new RealmList<>();
-    private SparseBooleanArray selectedItems = new SparseBooleanArray();
 
     @Override
     public ItemViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
@@ -27,7 +26,15 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ItemViewHo
     public void onBindViewHolder(final ItemViewHolder holder, final int position) {
         final RealmString city = items.get(position);
         holder.city.setText(city.getStringValue());
-        holder.container.setActivated(selectedItems.get(position, false));
+
+        holder.city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                final Intent intent = new Intent(holder.city.getContext(), InfoCityActivity.class);
+                intent.putExtra("City", city.getStringValue());
+                holder.city.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -35,38 +42,17 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ItemViewHo
         return items.size();
     }
 
-    public void clear() {
-        items.clear();
-    }
-
     public void addAll(final RealmList<RealmString>items) {
         this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void add(final RealmString item) {
-        items.add(item);
-        notifyDataSetChanged();
-    }
-
-    RealmString find(final int pos) {
-        return items.get(pos);
-    }
-
-    RealmString remove(final int pos) {
-        final RealmString item = items.remove(pos);
-        notifyItemRemoved(pos);
-        return item;
-    }
-
     class ItemViewHolder extends RecyclerView.ViewHolder {
         private final TextView city;
-        private final View container;
 
         ItemViewHolder(final View itemView) {
             super(itemView);
-            container = itemView.findViewById(R.id.item_container);
-            city = (TextView) itemView.findViewById(R.id.city);
+            city = itemView.findViewById(R.id.city);
         }
     }
 }
