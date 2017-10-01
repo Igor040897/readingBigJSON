@@ -1,7 +1,7 @@
 package com.igor040897.test;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        spCountries = (Spinner) findViewById(R.id.spCountries);
+        spCountries = findViewById(R.id.spCountries);
         recyclerView = findViewById(R.id.cities);
     }
 
@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         spCountries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                recyclerView.setAdapter(getAdapterCountry(i));
+            public void onItemSelected(final AdapterView<?> adapterView, View view, int i, long l) {
+                recyclerView.setAdapter(getAdapterCountry());
             }
 
             @Override
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private RecyclerView.Adapter getAdapterCountry(int positionInSpinner) {
+    private RecyclerView.Adapter getAdapterCountry() {
         final Realm realm = Realm.getDefaultInstance();
         String string = spCountries.getSelectedItem().toString();
         Country country = realm.where(Country.class).equalTo("country", string).findFirst();
