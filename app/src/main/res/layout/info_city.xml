@@ -32,4 +32,14 @@
         android:gravity="center"
         android:textSize="@dimen/text_small_size"
         tools:text="longitude: " />
+
+    <TextView
+        android:id="@+id/url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/longitude"
+        android:gravity="center"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="@dimen/text_small_size"
+        tools:text="url: " />
 </RelativeLayout>
