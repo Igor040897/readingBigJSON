@@ -38,8 +38,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/longitude"
+        android:layout_marginTop="@dimen/margin_small"
         android:gravity="center"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="@dimen/text_small_size"
-        tools:text="url: " />
+        android:text="@string/link_to_wikipedia" />
+
+    <TextView
+        android:id="@+id/geo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/url"
+        android:layout_marginTop="@dimen/margin_small"
+        android:gravity="center"
+        android:text="@string/map"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="@dimen/text_small_size" />
 </RelativeLayout>
