@@ -20,6 +20,9 @@ public class InfoCityActivity extends AppCompatActivity {
     private TextView tvLongitude;
     private TextView tvLatitude;
     private TextView tvUrl;
+    private TextView tvGeo;
+    private String url;
+    private String geo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class InfoCityActivity extends AppCompatActivity {
         tvLongitude = findViewById(R.id.longitude);
         tvLatitude = findViewById(R.id.latitude);
         tvUrl = findViewById(R.id.url);
+        tvGeo = findViewById(R.id.geo);
     }
 
 
@@ -44,7 +48,8 @@ public class InfoCityActivity extends AppCompatActivity {
             tvCity.setText(getString(R.string.city) + wikipediaArticle.getTitle());
             tvLatitude.setText(getString(R.string.latitude) + String.valueOf(wikipediaArticle.getLatitude()));
             tvLongitude.setText(getString(R.string.longitude) + String.valueOf(wikipediaArticle.getLongitude()));
-            tvUrl.setText(wikipediaArticle.getWikipediaUrl());
+            url = wikipediaArticle.getWikipediaUrl();
+            geo = "geo:" + String.valueOf(wikipediaArticle.getLatitude()) + "," + String.valueOf(wikipediaArticle.getLongitude());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,7 +58,16 @@ public class InfoCityActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(tvUrl.getText().toString()));
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
+        tvGeo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(geo));
                 startActivity(intent);
             }
         });
